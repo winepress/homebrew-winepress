@@ -62,6 +62,9 @@ module Hbc::DSL
 
   def win_exe; self.class.win_exe; end
 
+  def wine_install_flags; self.class.wine_install_flags; end
+
+
   module ClassMethods
 
     # A quite fragile shim to allow "full_name" be exposed as simply "name"
@@ -277,6 +280,13 @@ module Hbc::DSL
         raise Hbc::CaskInvalidError.new(self.token, "'win_exe' stanza may only appear once")
       end
       @win_exe ||= win_exe
+    end
+
+    def wine_install_flags(wine_install_flags=nil)
+      if @wine_install_flags and !wine_install_flags.nil?
+        raise Hbc::CaskInvalidError.new(self.token, "'wine_install_flags' stanza may only appear once")
+      end
+      @wine_install_flags ||= wine_install_flags
     end
 
     def self.ordinary_artifact_types
