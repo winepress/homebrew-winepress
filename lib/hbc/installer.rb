@@ -112,7 +112,8 @@ class Hbc::Installer
 
     if ! @cask.wine_tricks.nil?
       if ! @cask.wine_tricks.empty?
-        @command.run('winetricks', :args => [@cask.wine_tricks.join(' ')])
+        # @command.run('winetricks', :args => [@cask.wine_tricks.join(' ')])
+        @command.run('winetricks', :args => @cask.wine_tricks)
      end
    end
   end
