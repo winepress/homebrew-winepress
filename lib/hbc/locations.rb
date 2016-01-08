@@ -5,7 +5,7 @@ module Hbc::Locations
 
   module ClassMethods
     def caskroom
-      @@caskroom ||= Pathname('/opt/homebrew-wine/Caskroom')
+      @@caskroom ||= Pathname('/opt/homebrew-winepress/winepress')
     end
 
     def caskroom=(caskroom)
