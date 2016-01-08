@@ -156,7 +156,7 @@ class Hbc::Installer
       f.write shell_script_template
     end
 
-    if not File.executable? shell_script_path
+    if not File.executable_real? shell_script_path
       print 'not executable'
       File.chmod(755, shell_script_path)
     end
