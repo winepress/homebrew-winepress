@@ -45,7 +45,7 @@ class Hbc::CLI::Doctor < Hbc::CLI::Base
   def self.alt_taps
     alt_taps = notfound_string
     begin
-      alt_taps = Pathname.glob(homebrew_repository.join 'Library', 'Taps', '*', '*', 'Casks').map(&:dirname) -
+      alt_taps = Pathname.glob(homebrew_repository.join 'Library', 'Taps', '*', '*', 'Grapes').map(&:dirname) -
                  [fq_default_tap]
       alt_taps = nil unless alt_taps.length > 0
     rescue StandardError; end
@@ -55,7 +55,7 @@ class Hbc::CLI::Doctor < Hbc::CLI::Base
   def self.default_cask_count
     default_cask_count = notfound_string
     begin
-      default_cask_count = homebrew_repository.join(fq_default_tap, 'Casks').children.count(&:file?)
+      default_cask_count = homebrew_repository.join(fq_default_tap, 'Grapes').children.count(&:file?)
     rescue StandardError
       default_cask_count = "0 #{error_string %Q{Error reading #{fq_default_tap}}}"
     end

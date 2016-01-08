@@ -21,8 +21,8 @@ shopt -s nocasematch # case-insensitive regular expressions
 ###
 
 taps_subdir="Library/Taps"
-cask_tap_subdir="caskroom/homebrew-cask"
-dev_links=("cmd" "lib" "Casks")
+cask_tap_subdir="winepress/homebrew-winepress"
+dev_links=("cmd" "lib" "Grapes")
 
 ###
 ### functions

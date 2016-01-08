@@ -12,6 +12,6 @@ class Hbc::Source::UntappedQualified < Hbc::Source::TappedQualified
               puts result.stdout
       $stderr.puts result.stderr
     end
-    Hbc.homebrew_tapspath.join(tap, 'Casks', "#{token}.rb")
+    Hbc.homebrew_tapspath.join(tap, 'Grapes', "#{token}.rb")
   end
 end

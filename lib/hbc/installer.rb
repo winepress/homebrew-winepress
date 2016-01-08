@@ -345,7 +345,7 @@ class Hbc::Installer
   def save_caskfile(force=false)
     timestamp = :now
     create    = true
-    savedir   = @cask.metadata_subdir('Casks', timestamp, create)
+    savedir   = @cask.metadata_subdir('Grapes', timestamp, create)
     if Dir.entries(savedir).size > 2
       # should not happen
       if force
