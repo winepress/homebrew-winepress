@@ -109,7 +109,7 @@ module Hbc::Locations
     end
 
     def default_tap
-      @default_tap ||= 'caskroom/homebrew-cask'
+      @default_tap ||= 'winepress/homebrew-winepress'
     end
 
     def default_tap=(_tap)
@@ -134,9 +134,9 @@ module Hbc::Locations
         user, repo, token = token_with_tap.split('/')
         # bug/todo: handle old-style 1-slash form: phinze-cask/token
         repo = 'homebrew-' + repo unless repo.match(/^homebrew-/)
-        homebrew_tapspath.join(user, repo, 'Casks', "#{token}.rb")
+        homebrew_tapspath.join(user, repo, 'Grapes', "#{token}.rb")
       else
-        homebrew_tapspath.join(default_tap, 'Casks', "#{query}.rb")
+        homebrew_tapspath.join(default_tap, 'Grapes', "#{query}.rb")
       end
     end
 
