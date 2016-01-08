@@ -146,13 +146,18 @@ class Hbc::Installer
     @command.run!(Hbc.homebrew_executable, :args => ['upgrade', 'wine'])
   end
 
-
   def create_shell_script
     shell_script_name = @cask.token
     shell_script_path = Pathname.new('/usr/local/bin').join(shell_script_name)
 
     File.open(shell_script_path, 'w') do |f|
+      print 'writing ' + shell_script_path
       f.write shell_script_template
+    end
+
+    if not File.executable? shell_script_path
+      print 'not executable'
+      File.chmod(755, shell_script_path)
     end
   end
 

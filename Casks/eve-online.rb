@@ -11,5 +11,5 @@ cask :v1 => 'eve-online' do
   depends_on []
   wine_version '1.8'
   wine_arch 'win32'
-  wine_tricks ['corefonts', 'd3dx9_36', 'vcrun2005', 'vcrun2008', 'vcrun2010']
+  wine_tricks ['corefonts', 'd3dx9_36', 'd3dx9_42', 'vcrun2005', 'vcrun2008', 'vcrun2010', 'gecko']
 end
