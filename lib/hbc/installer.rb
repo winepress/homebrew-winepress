@@ -139,30 +139,34 @@ class Hbc::Installer
   end
 
   def install_wine
+    odebug "Installing wine"
     # Install Wine latest
     @command.run!(Hbc.homebrew_executable, :args => ['install', 'wine'])
   end
 
   def upgrade_wine
+    odebug "Upgrading wine"
     @command.run!(Hbc.homebrew_executable, :args => ['upgrade', 'wine'])
   end
 
   def create_shell_script
+    odebug "Creating shell script"
     shell_script_name = @cask.token
     shell_script_path = Pathname.new('/usr/local/bin').join(shell_script_name)
 
     File.open(shell_script_path, 'w') do |f|
-      print 'writing ' + shell_script_path
+      odebug 'writing ' + shell_script_path
       f.write shell_script_template
     end
 
     @command.run!('/bin/chmod', :args => ['+x', shell_script_path])
     if not File.executable_real? shell_script_path
-      print 'not executable'
+      odebug 'not executable'
     end
   end
 
   def shell_script_template
+    odebug "Loading shell script template"
     exe_path = @cask.staged_path.join(@cask.win_exe)
     exe_dir = @cask.staged_path
     prefix = @cask.staged_path.join("prefix")
