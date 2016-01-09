@@ -7,6 +7,7 @@ cask :v1 => 'winamp2' do
   name 'WinAmp 2'
   homepage 'https://web.archive.org/web/20020808092636/http://www.winamp.com/'
 
+  win_exe 'winamp.exe'
   install_exe 'winamp295rc_full.exe'
   wine_install_flags '/S'
 
