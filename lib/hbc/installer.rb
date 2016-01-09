@@ -113,7 +113,6 @@ class Hbc::Installer
 
     if ! @cask.wine_tricks.nil?
       if ! @cask.wine_tricks.empty?
-        # @command.run('winetricks', :args => [@cask.wine_tricks.join(' ')])
         @command.run('winetricks', :args => @cask.wine_tricks)
      end
    end
@@ -150,13 +149,28 @@ class Hbc::Installer
     @command.run!(Hbc.homebrew_executable, :args => ['upgrade', 'wine'])
   end
 
+  def install_exe
+    if not @cask.install_exe
+      return
+    end
+
+    installer_path = @cask.staged_path.join(@cask.install_exe)
+    installer_flags = @cask.wine_install_flags || ''
+
+    @command.run!('wine', :args => [installer_flags, installer_path])
+  end
+
   def create_shell_script
     odebug "Creating shell script"
+
+    if not @cask.win_exe
+      return
+    end
+
     shell_script_name = @cask.token
     shell_script_path = Pathname.new('/usr/local/bin').join(shell_script_name)
 
     template = shell_script_template
-
     File.open(shell_script_path, 'w') do |f|
       odebug 'writing ' + shell_script_path
       f.write template
@@ -170,12 +184,10 @@ class Hbc::Installer
 
   def shell_script_template
     odebug "Loading shell script template"
-    # exe_path = @cask.staged_path.join(@cask.win_exe)
-    # exe_dir = @cask.staged_path
     prefix = @cask.staged_path.join("prefix")
-
     exe_file = @cask.win_exe
     exe_path = ''
+
     search_path = @cask.staged_path.to_s
     Find.find(search_path) do |path|
       if path.include? exe_file

@@ -64,6 +64,8 @@ module Hbc::DSL
 
   def wine_install_flags; self.class.wine_install_flags; end
 
+  def install_exe; self.class.install_exe; end
+
 
   module ClassMethods
 
@@ -287,6 +289,13 @@ module Hbc::DSL
         raise Hbc::CaskInvalidError.new(self.token, "'wine_install_flags' stanza may only appear once")
       end
       @wine_install_flags ||= wine_install_flags
+    end
+
+    def install_exe(install_exe=nil)
+      if @install_exe and !install_exe.nil?
+        raise Hbc::CaskInvalidError.new(self.token, "'install_exe' stanza may only appear once")
+      end
+      @install_exe ||= install_exe
     end
 
     def self.ordinary_artifact_types

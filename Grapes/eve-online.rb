@@ -6,7 +6,6 @@ cask :v1 => 'eve-online' do
   homepage 'https://www.eveonline.com/'
 
   win_exe 'ExeFile.exe'
-  # win_exe_path 'C:\Program Files\CCP\EVE\bin\ExeFile.exe'
 
   depends_on []
   wine_version '1.8'
