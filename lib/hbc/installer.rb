@@ -1,4 +1,5 @@
 require 'rubygems'
+require 'find'
 
 require 'hbc/cask_dependencies'
 require 'hbc/staged'
@@ -154,9 +155,11 @@ class Hbc::Installer
     shell_script_name = @cask.token
     shell_script_path = Pathname.new('/usr/local/bin').join(shell_script_name)
 
+    template = shell_script_template
+
     File.open(shell_script_path, 'w') do |f|
       odebug 'writing ' + shell_script_path
-      f.write shell_script_template
+      f.write template
     end
 
     @command.run!('/bin/chmod', :args => ['+x', shell_script_path])
@@ -167,16 +170,28 @@ class Hbc::Installer
 
   def shell_script_template
     odebug "Loading shell script template"
-    exe_path = @cask.staged_path.join(@cask.win_exe)
-    exe_dir = @cask.staged_path
+    # exe_path = @cask.staged_path.join(@cask.win_exe)
+    # exe_dir = @cask.staged_path
     prefix = @cask.staged_path.join("prefix")
+
+    exe_file = @cask.win_exe
+    exe_path = ''
+    search_path = @cask.staged_path.to_s
+    Find.find(search_path) do |path|
+      if path.include? exe_file
+        exe_path = File.dirname(path)
+        break
+      else
+        next
+      end
+    end
 
     <<-EOS.undent
       #!/bin/sh
       export WINEPREFIX=#{prefix}
       export WINEDEBUG=-all
-      cd #{exe_dir}
-      wine #{exe_path} &>/dev/null
+      cd #{exe_path}
+      wine #{exe_file} &>/dev/null
     EOS
   end
 
