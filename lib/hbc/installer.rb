@@ -203,8 +203,8 @@ class Hbc::Installer
       #!/bin/sh
       export WINEPREFIX=#{prefix}
       export WINEDEBUG=-all
-      cd #{exe_path}
-      wine #{exe_file} &>/dev/null
+      cd "#{exe_path}""
+      wine "#{exe_file}"" &>/dev/null
     EOS
   end
 
