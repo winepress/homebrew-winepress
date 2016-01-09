@@ -72,6 +72,7 @@ class Hbc::Installer
       download
       verify
       extract_primary_container
+      install_exe
       create_shell_script
       install_artifacts
       save_caskfile force
