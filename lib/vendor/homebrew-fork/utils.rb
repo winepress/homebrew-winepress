@@ -57,6 +57,8 @@ def aria *args
   # args << "--insecure" if MacOS.release < "10.6"
   # args << "--verbose" if ENV['HOMEBREW_CURL_VERBOSE']
   # args << "--silent" unless $stdout.tty?
+  args << "--seed-time=0"
+  args << "--allow-overwrite=true"
 
   puts args
   # puts args.length
