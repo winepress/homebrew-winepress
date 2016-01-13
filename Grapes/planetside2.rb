@@ -2,7 +2,8 @@ cask :v1 => 'planetside2' do
   version '1'
   sha256 '95464498ead3a9e47c5b3f7f46a1a170a2fbfd854f472c6d9c24c66e8dffa13e'
   url 'https://web.archive.org/web/20150909054550/https://launch.daybreakgames.com/installer/PS2_setup.exe'
-  mirror 'https://launch.daybreakgames.com/installer/PS2_setup.exe'
+  # mirror 'https://launch.daybreakgames.com/installer/PS2_setup.exe'
+
   name 'Planetside 2'
   homepage 'https://www.planetside2.com'
 
