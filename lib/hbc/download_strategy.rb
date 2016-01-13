@@ -95,7 +95,7 @@ class Hbc::AriaDownloadStrategy < Hbc::HbCurlDownloadStrategy
   end
 
   def fetch
-    ohai "Downloading #{@url} with Aria2"
+    ohai "Starting Aria2"
     super
     # tarball_path
   end
@@ -133,10 +133,6 @@ end
 
 class Hbc::MagnetDownloadStrategy < Hbc::AriaDownloadStrategy
 
-  def fetch
-    @url = "'" << @url << "'"
-    super
-  end
 end
 
 class Hbc::SubversionDownloadStrategy < Hbc::HbSubversionDownloadStrategy

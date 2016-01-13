@@ -60,6 +60,7 @@ def aria *args
 
   puts args
   # puts args.length
+  puts aria, *args
   safe_system aria, *args
   # safe_system aria, args[1]
 end

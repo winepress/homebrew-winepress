@@ -26,6 +26,7 @@ class Hbc::Download
     when :svn then Hbc::SubversionDownloadStrategy.new(cask)
     when :post then Hbc::CurlPostDownloadStrategy.new(cask)
     when :magnet then Hbc::MagnetDownloadStrategy.new(cask)
+    when :aria then Hbc::AriaDownloadStrategy.new(cask)
     else Hbc::CurlDownloadStrategy.new(cask)
     end
   end
