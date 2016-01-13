@@ -90,57 +90,24 @@ end
 class Hbc::AriaDownloadStrategy < Hbc::HbCurlDownloadStrategy
 
   def _fetch
-    odebug "Calling aria with args #{curl_args.utf8_inspect}"
-    aria(*curl_args)
+    odebug "Calling aria with args #{aria_args.utf8_inspect}"
+    aria(*aria_args)
   end
 
   def fetch
+    ohai "Downloading #{@url} with Aria2"
     super
-    tarball_path
+    # tarball_path
   end
 
   private
 
-  def curl_args
-    default_curl_args.tap do |args|
-      args.concat(user_agent_args)
-      args.concat(cookies_args)
-      args.concat(referer_args)
-    end
+  def aria_args
+    default_aria_args
   end
 
-  def default_curl_args
+  def default_aria_args
     [url, '-d', temporary_path]
-  end
-
-  def user_agent_args
-    if uri_object.user_agent
-      ['-A', uri_object.user_agent]
-    else
-      []
-    end
-  end
-
-  def cookies_args
-    if uri_object.cookies
-      [
-        '-b',
-        # sort_by is for predictability between Ruby versions
-        uri_object.cookies.sort_by{ |key, value| key.to_s }.map do |key, value|
-          "#{CGI.escape(key.to_s)}=#{CGI.escape(value.to_s)}"
-        end.join(';')
-      ]
-    else
-      []
-    end
-  end
-
-  def referer_args
-    if uri_object.referer
-      ['-e',  uri_object.referer]
-    else
-      []
-    end
   end
 end
 
@@ -167,7 +134,7 @@ end
 class Hbc::MagnetDownloadStrategy < Hbc::AriaDownloadStrategy
 
   def fetch
-    @url = '"#{@url}"'
+    @url = "'" << @url << "'"
     super
   end
 end

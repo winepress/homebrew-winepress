@@ -48,15 +48,18 @@ def aria *args
   aria = Pathname.new '/usr/local/bin/aria2c'
   raise "#{aria} is not executable" unless aria.exist? and aria.executable?
 
-  flags = ''
+  # flags = ''
   # flags = HOMEBREW_CURL_ARGS
   # flags = flags.delete("#") if Hbc.verbose
 
-  args = [flags, *args]
+  args = *args
   # See https://github.com/Homebrew/homebrew/issues/6103
   # args << "--insecure" if MacOS.release < "10.6"
   # args << "--verbose" if ENV['HOMEBREW_CURL_VERBOSE']
   # args << "--silent" unless $stdout.tty?
 
+  puts args
+  # puts args.length
   safe_system aria, *args
+  # safe_system aria, args[1]
 end
