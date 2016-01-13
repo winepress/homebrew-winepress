@@ -208,6 +208,13 @@ class Hbc::Installer
     EOS
   end
 
+  def purge_shell_script
+    shell_script_name = @cask.token
+    shell_script_path = Pathname.new('/usr/local/bin').join(shell_script_name)
+
+    File.delete(shell_script_path)
+  end
+
   def verify
     Hbc::Verify.all(@cask, @downloaded_path)
   end
@@ -391,6 +398,7 @@ class Hbc::Installer
     disable_accessibility_access
     uninstall_artifacts
     purge_versioned_files
+    purge_shell_script
     purge_caskroom_path if force
   end
 
