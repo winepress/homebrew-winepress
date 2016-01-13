@@ -246,8 +246,8 @@ class Hbc::CLI
 
     def purpose
       puts <<-PURPOSE.undent
-        brew-cask provides a friendly homebrew-style CLI workflow for the
-        administration of Mac applications distributed as binaries.
+        winepress provides a friendly, homebrew-style CLI workflow for the
+        administration of Windows applications running under wine on UNIX systems.
 
       PURPOSE
     end
