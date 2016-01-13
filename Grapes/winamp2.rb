@@ -11,8 +11,6 @@ cask :v1 => 'winamp2' do
   install_exe 'winamp295rc_full.exe'
   wine_install_flags '/S'
 
-  depends_on []
   wine_version '1.4'
   wine_arch 'win32'
-  wine_tricks []
 end
