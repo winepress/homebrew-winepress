@@ -25,6 +25,7 @@ class Hbc::Download
     @downloader ||= case cask.url.using
     when :svn then Hbc::SubversionDownloadStrategy.new(cask)
     when :post then Hbc::CurlPostDownloadStrategy.new(cask)
+    when :magnet then Hbc::MagnetDownloadStrategy.new(cask)
     else Hbc::CurlDownloadStrategy.new(cask)
     end
   end
